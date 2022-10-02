@@ -2,4 +2,5 @@
 <%= current_user.first_name %>
 <%= current_user.last_name %>
 
-<%= link_to "Edit profile", edit_user_registration_path(current_user) %>
+<%= link_to "Edit profile", edit_user_registration_path %>
+<%= button_to "Log out", destroy_user_session_path, method: :delete, data: { turbo: false } %>

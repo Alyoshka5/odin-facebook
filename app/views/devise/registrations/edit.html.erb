@@ -6,9 +6,19 @@
   <%= user_profile_image(resource, 80) %>
 
   <div class="field">
+    <%= f.label :profile_image %><br />
     <%= f.file_field :profile_image, accept: "image/*" %>
   </div>
 
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
 
   <div class="field">
     <%= f.label :email %><br />
