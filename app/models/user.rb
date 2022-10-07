@@ -12,7 +12,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  def remove_friend(friend)
-    current_user.friends.destroy(friend)
+  def remove_friend(user, friend)
+    user.friends.destroy(friend)
   end
 end

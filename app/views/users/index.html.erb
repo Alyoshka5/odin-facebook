@@ -1,3 +1,18 @@
 <% @users.each do |user| %>
     <p><%= "#{user.first_name} #{user.last_name}" %></p>
+    <% if current_user.friends.include?(user) %>
+        <%= link_to "Unfriend", friends_destroy_path(id: user.id) %>
+    <% elsif current_user.pending_friends.include?(user) %>
+        <%= button_to "Cancel request", friend_request_path(FriendRequest.where(user_id: current_user.id, friend_id: user.id).first), method: :delete %>
+    <% elsif user.pending_friends.include?(current_user) %>
+        <%= form_with url: "/friend_requests/#{FriendRequest.where(user_id: user.id, friend_id: current_user.id).first.id}", method: :put do |form| %>
+            <%= form.submit "Confirm" %>
+        <% end %>
+        <%= button_to "Delete", friend_request_path(FriendRequest.where(user_id: user.id, friend_id: current_user.id).first), method: :delete %>
+    <% else %>
+        <%= form_with model: @friend_request do |form| %>
+            <%= form.hidden_field :friend_id, value: user.id %>
+            <%= form.submit "Add friend" %>
+        <% end %>
+    <% end %>
 <% end %>
