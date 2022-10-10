@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :friends, through: :friendships
   has_many :posts, dependent: :destroy
   has_many :comments
+  has_many :likes
 
   validates :first_name, presence: true, length: { minimum: 2 }
   validates :last_name, presence: true, length: { minimum: 2 }
