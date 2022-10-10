@@ -1,10 +1,4 @@
 <%= current_user.email %><br>
-<%= current_user.first_name %>
-<%= current_user.last_name %>
-
-<%= link_to "Edit profile", edit_user_registration_path %><br>
-<%= button_to "Log out", destroy_user_session_path, method: :delete, data: { turbo: false } %><br>
-<%= link_to "All users", users_path %>
 
 <%= form_with model: @post do |form| %>
     <%= form.text_area :content, size: "60x8", placeholder: "What's on your mind, #{current_user.first_name}?" %><br>
