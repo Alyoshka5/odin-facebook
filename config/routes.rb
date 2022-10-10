@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get 'friends/index'
   get 'friends/destroy'
   get 'friends/show'
@@ -9,7 +10,6 @@ Rails.application.routes.draw do
   resources :friendships
   resources :users
   resources :posts
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   # root "articles#index"
