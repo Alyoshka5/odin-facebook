@@ -7,6 +7,14 @@
 <%= link_to "All users", users_path %>
 
 <%= form_with model: @post do |form| %>
-    <%= form.text_area :content, placeholder: "Hey" %>
+    <%= form.text_area :content, size: "60x8", placeholder: "What's on your mind, #{current_user.first_name}?" %><br>
     <%= form.submit %>
+<% end %>
+
+<h2>Posts</h2>
+<% @posts.each do |post| %>
+    <div>
+        <%= post.user.first_name %> <%= post.user.last_name%><br>
+        <%= post.content %>
+    </div><br>
 <% end %>
