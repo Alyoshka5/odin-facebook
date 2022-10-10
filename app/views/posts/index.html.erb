@@ -15,6 +15,7 @@
 <% @posts.each do |post| %>
     <div>
         <%= post.user.first_name %> <%= post.user.last_name%><br>
-        <%= post.content %>
+        <%= post.content %><br>
+        <%= link_to "Comment", post_comments_path(post) %>
     </div><br>
 <% end %>

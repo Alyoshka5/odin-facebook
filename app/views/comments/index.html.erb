@@ -1,0 +1,6 @@
+<h3><%= @post.content %></h3>
+<p><%= @post.user.first_name %> <%= @post.user.last_name %></p>
+
+<%= form_with url: "comments" do |form| %>
+    <%= form.text_field :content, placeholder: "Write a comment..." %><br>
+<% end %>
