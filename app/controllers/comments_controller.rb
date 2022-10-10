@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
     def index
         @post = Post.find(params[:post_id])
         @comment = Comment.new
+        @comments = @post.comments
     end
     
     def create

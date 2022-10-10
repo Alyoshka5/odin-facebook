@@ -4,3 +4,10 @@
 <%= form_with url: "comments" do |form| %>
     <%= form.text_field :content, placeholder: "Write a comment..." %><br>
 <% end %>
+
+<% @comments.each do |comment| %>
+    <div>
+        <%= comment.user.first_name %> <%= comment.user.last_name%><br>
+        <%= comment.content %><br>
+    </div><br>
+<% end %>
