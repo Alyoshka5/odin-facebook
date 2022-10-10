@@ -10,7 +10,7 @@ class PostsController < ApplicationController
         if @post.save
             redirect_to root_path
         else
-            redirect_to root_path
+            redirect_to root_path, status: :unprocessable_entity
         end
     end
 
