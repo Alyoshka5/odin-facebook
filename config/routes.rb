@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get 'friends/index'
   get 'friends/destroy'
   get 'friends/show'
+  get 'posts/like', to: 'posts#like'
+  
   
   devise_for :users
 

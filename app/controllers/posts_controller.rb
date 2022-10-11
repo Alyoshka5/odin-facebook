@@ -14,6 +14,19 @@ class PostsController < ApplicationController
         end
     end
 
+    def like
+        @post = Post.find(params[:post_id])
+        @like = @post.likes.build
+        @like.user = current_user
+        if @like.save
+            redirect_to root_path
+        else
+            redirect_to root_path, status: :unprocessable_entity
+        end
+    end
+
+
+
     private
 
     def post_params
