@@ -12,9 +12,9 @@
         <%= post.content %><br>
 
         <% if current_user.likes.where(post_id: post.id).any? %>
-            
+            <%= link_to "Unike", posts_unlike_path(post_id: post.id, view: 'posts') %>
         <% else %>
-            <%= link_to "Like", posts_like_path(post_id: post.id) %>
+            <%= link_to "Like", posts_like_path(post_id: post.id, view: 'posts') %>
         <% end %>
         <%= post.likes.count %> likes <br>
 

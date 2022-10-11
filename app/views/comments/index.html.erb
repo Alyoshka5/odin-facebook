@@ -1,6 +1,15 @@
 <h3><%= @post.content %></h3>
 <p><%= @post.user.first_name %> <%= @post.user.last_name %></p>
 
+<div>
+<% if current_user.likes.where(post_id: @post.id).any? %>
+    <%= link_to "Unike", posts_unlike_path(post_id: @post.id, view: 'comments') %>
+<% else %>
+    <%= link_to "Like", posts_like_path(post_id: @post.id, view: 'comments') %>
+<% end %>
+<%= @post.likes.count %> likes <br>
+</div>
+
 <%= form_with url: "comments" do |form| %>
     <%= form.text_field :content, placeholder: "Write a comment..." %><br>
 <% end %>

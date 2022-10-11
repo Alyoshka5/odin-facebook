@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'friends/destroy'
   get 'friends/show'
   get 'posts/like', to: 'posts#like'
-  
+  get 'posts/unlike', to: 'posts#unlike'
   
   devise_for :users
 
