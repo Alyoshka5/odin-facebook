@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments
   has_many :likes
+  has_one :profile, dependent: :destroy
 
   validates :first_name, presence: true, length: { minimum: 2 }
   validates :last_name, presence: true, length: { minimum: 2 }
@@ -15,6 +16,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  
   def remove_friend(user, friend)
     user.friends.destroy(friend)
   end

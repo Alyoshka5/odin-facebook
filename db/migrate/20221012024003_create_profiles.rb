@@ -5,6 +5,8 @@ class CreateProfiles < ActiveRecord::Migration[7.0]
       t.text :hobbies
       t.string :city
 
+      t.belongs_to :user
+
       t.timestamps
     end
   end

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'posts/like', to: 'posts#like'
   get 'posts/unlike', to: 'posts#unlike'
   
-  devise_for :users
+  devise_for :users, controllers: { registrations: "users/registrations" }
 
   resources :friend_requests
   resources :friendships
@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments
   end
+  resources :profiles
 
   # Defines the root path route ("/")
   # root "articles#index"
