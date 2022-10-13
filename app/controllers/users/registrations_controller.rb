@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super do |resource|
-      resource.create_profile
+      resource.create_profile(first_name: resource.first_name, last_name: resource.last_name, email: resource.email)
     end
   end
 
