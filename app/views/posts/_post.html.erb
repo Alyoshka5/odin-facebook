@@ -1,0 +1,14 @@
+<div>
+    <%= post.user.first_name %> <%= post.user.last_name%><br>
+    <%= post.content %><br>
+
+    <% if current_user.likes.where(post_id: post.id).any? %>
+        <%= link_to "Unike", posts_unlike_path(post_id: post.id, view: 'posts') %>
+    <% else %>
+        <%= link_to "Like", posts_like_path(post_id: post.id, view: 'posts') %>
+    <% end %>
+    <%= post.likes.count %> likes <br>
+
+    <%= link_to "Comment", post_comments_path(post) %>
+    <%= post.comments.count %> comments
+</div><br>

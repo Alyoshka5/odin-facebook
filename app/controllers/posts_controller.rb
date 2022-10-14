@@ -18,22 +18,20 @@ class PostsController < ApplicationController
         @post = Post.find(params[:post_id])
         @like = @post.likes.build
         @like.user = current_user
-        path = params[:view] == 'posts' ? root_path : post_comments_path(@post)
         if @like.save
-            redirect_to path
+            redirect_back(fallback_location: root_path)
         else
-            redirect_to path, status: :unprocessable_entity
+            redirect_back(fallback_location: root_path)
         end
     end
     
     def unlike
         @post = Post.find(params[:post_id])
         @like = Like.find_by(post_id: params[:post_id], user_id: current_user.id)
-        path = params[:view] == 'posts' ? root_path : post_comments_path(@post)
         if @like.destroy
-            redirect_to path
+            redirect_back(fallback_location: root_path)
         else
-            redirect_to path, status: :unprocessable_entity
+            redirect_back(fallback_location: root_path)
         end
     end
 

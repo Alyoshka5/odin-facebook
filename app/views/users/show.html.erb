@@ -1,0 +1,44 @@
+<div>
+    <%= user_profile_image(@user, 120) %>
+    <h2><%= @profile.first_name %> <%= @profile.last_name %></h3>
+    <%= @user.friends.count %> <%= @user.friends.count == 1 ? "friend" : "friends" %><br>
+    <% if @user == current_user %>
+        <%= link_to "Edit profile", edit_profile_path(@profile) %>
+    <% end %>
+</div>
+
+<br><br>
+
+<div>
+    <h3>Intro</h4>
+    <div>
+        <% if @profile.about.length + @profile.hobbies.length + @profile.city.length == 0 %>
+            <p>Nothing to see here</p>
+        <% end %>
+    </div>
+    <div>
+        <% if @profile.about.length > 0 %>
+            <h4>About me</h4>
+            <%= @profile.about %>
+        <% end %>
+    </div>
+    <div>
+        <% if @profile.hobbies.length > 0 %>
+            <h4>Hobbies</h4>
+            <%= @profile.hobbies %>
+        <% end %>
+    </div>
+    <div>
+        <% if @profile.city.length > 0 %>
+            <h4>Current city</h4>
+            <%= @profile.city %>
+        <% end %>
+    </div>
+</div>
+
+<div>
+    <h3>Posts</h4>
+    <% @posts.each do |post| %>
+        <%= render "posts/post", post: post %>
+    <% end %>
+</div>
