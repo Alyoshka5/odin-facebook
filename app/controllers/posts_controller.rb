@@ -2,6 +2,8 @@ class PostsController < ApplicationController
     def index
         @post = Post.new
         @posts = Post.where(user_id: current_user.friends).or(Post.where(user_id: current_user)).order(created_at: :desc).limit(50)
+        @pending_requests = FriendRequest.where(friend_id: current_user).pluck(:user_id)
+        @pending_friends = User.where(id: @pending_requests)
     end
 
     def create

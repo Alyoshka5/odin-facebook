@@ -20,12 +20,12 @@ class FriendRequestsController < ApplicationController
 
     def update
         @friend_request.accept
-        redirect_to users_path
+        redirect_back(fallback_location: users_path)
     end
 
     def destroy
         @friend_request.destroy
-        redirect_to users_path
+        redirect_back(fallback_location: users_path)
     end
 
     private

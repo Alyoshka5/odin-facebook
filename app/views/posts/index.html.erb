@@ -9,3 +9,12 @@
 <% @posts.each do |post| %>
     <%= render "post", post: post %>
 <% end %>
+
+<h3>Notifications</h3>
+<% @pending_friends.each do |requester| %>
+    <%= requester.first_name %> <%= requester.last_name %> wants to be your friend.<br>
+    <%= form_with url: "/friend_requests/#{FriendRequest.where(user_id: requester.id, friend_id: current_user.id).first.id}", method: :put do |form| %>
+        <%= form.submit "Confirm" %>
+    <% end %>
+    <%= button_to "Delete", friend_request_path(FriendRequest.where(user_id: requester.id, friend_id: current_user.id).first), method: :delete %>
+<% end %>
