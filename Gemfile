@@ -74,3 +74,4 @@ end
 gem "devise", "~> 4.8"
 gem "gravatar_image_tag", "~> 1.2"
 gem "image_processing", "~> 1.12"
+gem "letter_opener", group: :development

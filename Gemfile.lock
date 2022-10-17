@@ -113,6 +113,10 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    launchy (2.5.0)
+      addressable (~> 2.7)
+    letter_opener (1.8.1)
+      launchy (>= 2.2, < 3)
     loofah (2.19.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -205,8 +209,6 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
-    vips (8.12.2)
-      ffi (~> 1.12)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
@@ -238,6 +240,7 @@ DEPENDENCIES
   image_processing (~> 1.12)
   importmap-rails
   jbuilder
+  letter_opener
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.4)
@@ -247,7 +250,6 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
-  vips
   web-console
   webdrivers
 
