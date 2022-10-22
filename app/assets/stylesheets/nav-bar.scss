@@ -1,0 +1,62 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 3px 5px #d6d6d6;
+    margin-bottom: 5px;
+
+.icon-buttons {
+    display: flex;
+
+    & > * {
+        margin: 10px 40px 5px;
+    }
+}
+
+.logout-button {
+    background-color: #ffffff00;
+    border: none;
+    &:hover { cursor: pointer; }
+}
+
+.facebook-button {
+    margin: 13px 20px 5px;
+}
+
+.profile-link {
+    margin: 13px 20px 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-name-link {
+    color: #000;
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
