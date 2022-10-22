@@ -1,45 +1,45 @@
-<h2>Sign up</h2>
+<div class="registrations-new">
+<div class="sign-up">
+<h2>Sign Up</h2>
+<p class="subtitle">It's quick and easy</p>
+<hr>
 
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :profile_image %><br />
-    <%= f.file_field :profile_image, accept: "image/*" %>
+
+  <div class="field first-name">
+    <%= f.text_field :first_name, autofocus: true, placeholder: "First name" %>
   </div>
 
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true %>
+  <div class="field last-name">
+    <%= f.text_field :last_name, placeholder: "Last name" %>
   </div>
 
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
+  <div class="field email">
+    <%= f.email_field :email, autocomplete: "email", placeholder: "Email" %>
   </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
+  <div class="field password">
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: "New password" %>
   </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+  <div class="field password-confirmation">
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm password" %>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  <div class="info">
+    <p>People who use our service may have uploaded your contact information to Facebook. <a href="https://www.facebook.com/help/637205020878504">Learn more</a>.</p>
+    <p>By clicking Sign Up, you agree to our <a href="https://www.facebook.com/legal/terms/update">Terms</a>, <a href="https://www.facebook.com/about/privacy/update">Privacy Policy</a> and <a href="https://www.facebook.com/policies/cookies/">Cookies Policy</a>. You may receive SMS Notifications from us and can opt out any time.</p>
   </div>
+
+  <%= render "devise/shared/links" %>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", class: "signup-button" %>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+</div>
+</div>

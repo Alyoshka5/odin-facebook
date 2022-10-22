@@ -1,25 +1,35 @@
+<div class="passwords-edit">
+<div class="change-password">
 <h2>Change your password</h2>
+<hr>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
   <%= f.hidden_field :reset_password_token %>
 
   <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
+    <%= f.password_field :password, autofocus: true, autocomplete: "new-password", placeholder: "New password" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm new password" %>
   </div>
+
+  <hr>
 
   <div class="actions">
-    <%= f.submit "Change my password" %>
+    <%= f.submit "Change my password", class: "change-password-button" %>
+  </div>
+
+  <div class="signin-buttons">
+    <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+      <%= link_to "Create new account", new_registration_path(resource_name), class: "create-acount-button" %>
+    <% end %>
+
+    <%- if controller_name != 'sessions' %>
+      <%= link_to "Log in", new_session_path(resource_name), class: "login-button" %>
+    <% end %>
   </div>
 <% end %>
-
-<%= render "devise/shared/links" %>
+</div>
+</div>

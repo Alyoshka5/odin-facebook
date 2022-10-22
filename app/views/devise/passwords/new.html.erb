@@ -1,16 +1,31 @@
+<div class="passwords-new">
+<div class="forgot-password">
 <h2>Forgot your password?</h2>
+<hr>
+<p>Please enter your email to send reset password instructions.</p>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email" %>
   </div>
+
+  <hr>
 
   <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
+    <%= f.submit "Send me reset password instructions", class: "send-reset-password-button" %>
+  </div>
+
+  <div class="signin-buttons">
+    <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+      <%= link_to "Create new account", new_registration_path(resource_name), class: "create-acount-button" %>
+    <% end %>
+
+    <%- if controller_name != 'sessions' %>
+      <%= link_to "Log in", new_session_path(resource_name), class: "login-button" %>
+    <% end %>
   </div>
 <% end %>
-
-<%= render "devise/shared/links" %>
+</div>
+</div>
