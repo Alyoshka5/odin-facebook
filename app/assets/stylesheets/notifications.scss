@@ -1,0 +1,72 @@
+.notifications-container {
+    padding: 0 30px;
+
+.pending-friend {
+    background-color: #fff;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.pending-friend-content {
+    margin: 5px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.friend-request-info {
+    margin: 0;
+}
+
+.friend-request-buttons {
+    display: flex;
+    gap: 10px;
+
+    .confirm, .delete {
+        font-weight: bold;
+        width: 100px;
+        height: 30px;
+        padding: 5px;
+        border: none;
+        border-radius: 5px;
+
+        &:hover { cursor: pointer; }
+    }
+
+    .confirm {
+        color: #fff;
+        background-color: #1871e6;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

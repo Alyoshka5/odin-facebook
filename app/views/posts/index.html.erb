@@ -1,20 +1,39 @@
-<%= current_user.email %><br>
+<div class="posts-index">
 
-<%= form_with model: @post do |form| %>
-    <%= form.text_area :content, size: "60x8", placeholder: "What's on your mind, #{current_user.first_name}?" %><br>
-    <%= form.submit %>
+<div class="notifications-container">
+<h3>Notifications</h3>
+<% @pending_friends.each do |requester| %>
+    <div class="pending-friend">
+        <%= link_to user_profile_image(requester, 50), user_path(current_user) %>
+        <div class="pending-friend-content">
+            <p class="friend-request-info"><%= requester.first_name %> <%= requester.last_name %> wants to be your friend.</p>
+            <div class="friend-request-buttons">
+                <%= form_with url: "/friend_requests/#{FriendRequest.where(user_id: requester.id, friend_id: current_user.id).first.id}", method: :put do |form| %>
+                    <%= form.submit "Confirm", class: "confirm" %>
+                <% end %>
+                <%= button_to "Delete", friend_request_path(FriendRequest.where(user_id: requester.id, friend_id: current_user.id).first), method: :delete, class: "delete" %>
+            </div>
+        </div>
+    </div>
 <% end %>
+</div>
 
-<h2>Posts</h2>
+<div class="center-container">
+<div class="post-form">
+    <h2>Create post</h2>
+    <hr>
+    <div class="user-info">
+        <%= link_to user_profile_image(current_user), user_path(current_user) %>
+        <%= link_to current_user.first_name+" "+current_user.last_name, user_path(current_user), class: "user-name" %>
+    </div>
+    <%= form_with model: @post do |form| %>
+        <%= form.text_area :content, placeholder: "What's on your mind, #{current_user.first_name}?", class: "post-input" %><br>
+        <%= form.submit "Post", class: "post-button" %>
+    <% end %>
+</div>
+
 <% @posts.each do |post| %>
     <%= render "post", post: post %>
 <% end %>
-
-<h3>Notifications</h3>
-<% @pending_friends.each do |requester| %>
-    <%= requester.first_name %> <%= requester.last_name %> wants to be your friend.<br>
-    <%= form_with url: "/friend_requests/#{FriendRequest.where(user_id: requester.id, friend_id: current_user.id).first.id}", method: :put do |form| %>
-        <%= form.submit "Confirm" %>
-    <% end %>
-    <%= button_to "Delete", friend_request_path(FriendRequest.where(user_id: requester.id, friend_id: current_user.id).first), method: :delete %>
-<% end %>
+</div>
+</div>

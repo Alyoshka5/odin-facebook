@@ -1,14 +1,36 @@
-<div>
-    <%= post.user.first_name %> <%= post.user.last_name%><br>
-    <%= post.content %><br>
+<div class="post">
+    <div class="user-info">
+        <%= link_to user_profile_image(post.user), user_path(post.user) %>
+        <div class="name-date">
+            <%= link_to post.user.first_name+" "+post.user.last_name, user_path(post.user), class: "user-name" %>
+            <p class="date"><%= post.created_at.localtime.strftime('%b %d') %></p>
+        </div>
+    </div>
+    
+    <p class="content"><%= post.content %></p>
 
-    <% if current_user.likes.where(post_id: post.id).any? %>
-        <%= link_to "Unike", posts_unlike_path(post_id: post.id, view: 'posts') %>
-    <% else %>
-        <%= link_to "Like", posts_like_path(post_id: post.id, view: 'posts') %>
-    <% end %>
-    <%= post.likes.count %> likes <br>
+    <hr class="content-likes">
+    <div class="like-comment-amounts">
+        <p><%= post.likes.count %> Likes </p>
+        <p><%= post.comments.count %> Comments</p>
+    </div>
+    <hr>
+    <div class="like-comment-buttons">
+        <% if current_user.likes.where(post_id: post.id).any? %>
+            <div class="like-div">
+                <%= link_to image_tag("liked-like.png", size: 18), posts_unlike_path(post_id: post.id, view: 'posts'), class: "like-button" %>
+                <%= link_to "Like", posts_unlike_path(post_id: post.id, view: 'posts'), class: "unlike-link" %>
+            </div>
+        <% else %>
+            <div class="like-div">
+                <%= link_to image_tag("unliked-like.png", size: 18), posts_like_path(post_id: post.id, view: 'posts') %>
+                <%= link_to "Like", posts_like_path(post_id: post.id, view: 'posts'), class: "like-link" %>
+            </div>
+        <% end %>
 
-    <%= link_to "Comment", post_comments_path(post) %>
-    <%= post.comments.count %> comments
+        <div class="comment-div">
+            <%= link_to image_tag("comment-icon.png", size: 18), post_comments_path(post) %>
+            <%= link_to "Comment", post_comments_path(post), class: "comment-link" %>
+        </div>
+    </div>
 </div><br>
