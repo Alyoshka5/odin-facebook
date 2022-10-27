@@ -1,7 +1,6 @@
 .posts-index {
     height: 100%;
-    width: 100%;
-    background-color: #f0f2f5;
+    background-color: #f0f2f5; // COLOR DOES NOT GO ALL THE WAY DOWN
     display: grid;
     grid-template-columns: repeat(3, calc(100%/3));
 

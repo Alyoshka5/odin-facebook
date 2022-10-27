@@ -1,24 +1,24 @@
-<h3><%= @post.content %></h3>
-<p><%= @post.user.first_name %> <%= @post.user.last_name %></p>
+<div class="comments-index">
+<div class="center-column">
 
-<div>
-<% if current_user.likes.where(post_id: @post.id).any? %>
-    <%= link_to "Unike", posts_unlike_path(post_id: @post.id, view: 'comments') %>
-<% else %>
-    <%= link_to "Like", posts_like_path(post_id: @post.id, view: 'comments') %>
+<p class="return"><%= link_to "⬅ Return", :back %></p>
+
+<%= render 'posts/post', post: @post %>
+
+<%= form_with url: "comments", class: "comment-form" do |form| %>
+    <%= link_to user_profile_image(current_user, 30), user_path(current_user) %>
+    <%= form.text_field :content, placeholder: "Write a comment...", class: "comment-field"%>
 <% end %>
-<%= @post.likes.count %> likes <br>
-</div>
-
-<%= link_to "Back", :back %>
-
-<%= form_with url: "comments" do |form| %>
-    <%= form.text_field :content, placeholder: "Write a comment..." %><br>
-<% end %>
+<p class="comment-instruction">Press Enter to post.</p>
 
 <% @comments.each do |comment| %>
-    <div>
-        <%= comment.user.first_name %> <%= comment.user.last_name%><br>
-        <%= comment.content %><br>
-    </div><br>
+    <div class="comment-container">
+        <%= link_to user_profile_image(comment.user, 30), user_path(comment.user), class: "user-image" %>
+        <div class="comment">
+            <%= link_to "#{comment.user.first_name} #{comment.user.last_name}", user_path(comment.user), class: "user-name"%>
+            <p class="content"><%= comment.content %></p>
+        </div>
+    </div>
 <% end %>
+</div>
+</div>
