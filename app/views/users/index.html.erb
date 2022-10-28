@@ -1,37 +1,56 @@
+<div class="users-index">
 <% if @pending_friends.any? %>
     <h3>Friend Requests</h3>
-    <% @pending_friends.each do |requester| %>
-        <%= requester.first_name %> <%= requester.last_name %><br>
-        <%= form_with url: "/friend_requests/#{FriendRequest.where(user_id: requester.id, friend_id: current_user.id).first.id}", method: :put do |form| %>
-            <%= form.submit "Confirm" %>
+    <div class="users-container">
+        <% @pending_friends.each do |requester| %>
+            <div class="user">
+                <%= link_to user_profile_image(requester, 240, "5px 5px 0 0"), user_path(requester) %>
+                <div class="user-info-buttons">
+                    <%= link_to "#{requester.first_name} #{requester.last_name}", user_path(requester), class: "user-name" %>
+                    <%= form_with url: "/friend_requests/#{FriendRequest.where(user_id: requester.id, friend_id: current_user.id).first.id}", method: :put do |form| %>
+                        <%= form.submit "Confirm", class: "button blue-bg" %>
+                    <% end %>
+                    <%= button_to "Delete", friend_request_path(FriendRequest.where(user_id: requester.id, friend_id: current_user.id).first), method: :delete, class: "button gray-bg" %>
+                </div>
+            </div>
         <% end %>
-        <%= button_to "Delete", friend_request_path(FriendRequest.where(user_id: requester.id, friend_id: current_user.id).first), method: :delete %>
-    <% end %>
+    </div>
 <% end %>
 
 <% if @friends.any? %>
     <h3>Friends</h3>
-    <% @friends.each do |friend| %>
-        <div>
-            <%= friend.first_name %> <%= friend.last_name %><br>
-            <%= link_to "Unfriend", friends_destroy_path(id: friend.id) %>
-        </div><br>
-    <% end %>
+    <div class="users-container">
+        <% @friends.each do |friend| %>
+            <div class="user">
+                <%= link_to user_profile_image(friend, 240, "5px 5px 0 0"), user_path(friend) %>
+                <div class="user-info-buttons">
+                    <%= link_to "#{friend.first_name} #{friend.last_name}", user_path(friend), class: "user-name" %>
+                    <%= link_to "Unfriend", friends_destroy_path(id: friend.id), class: "link-button button gray-bg" %>
+                </div>
+            </div>
+        <% end %>
+    </div>
 <% end %>
 
 <% if @suggested.any? %>
     <h3>Suggested</h3>
-    <% @suggested.each do |user| %>
-        <div>
-            <%= user.first_name %> <%= user.last_name %><br>
-            <% if current_user.pending_friends.include?(user) %>
-                <%= button_to "Cancel request", friend_request_path(FriendRequest.where(user_id: current_user.id, friend_id: user.id).first), method: :delete %>
-            <% else %>
-                <%= form_with model: @friend_request do |form| %>
-                    <%= form.hidden_field :friend_id, value: user.id %>
-                    <%= form.submit "Add friend" %>
-                <% end %>
-            <% end %>
-        </div><br>
-    <% end %>
+    <div class="users-container">
+        <% @suggested.each do |user| %>
+            <div class="user">
+                <%= link_to user_profile_image(user, 240, "5px 5px 0 0"), user_path(user) %>
+                <div class="user-info-buttons">
+                    <%= link_to "#{user.first_name} #{user.last_name}", user_path(user), class: "user-name" %>
+                    <% if current_user.pending_friends.include?(user) %>
+                        <%= button_to "Cancel request", friend_request_path(FriendRequest.where(user_id: current_user.id, friend_id: user.id).first), method: :delete, class: "button gray-bg" %>
+                    <% else %>
+                        <%= form_with model: @friend_request do |form| %>
+                            <%= form.hidden_field :friend_id, value: user.id %>
+                            <%= form.submit "Add friend", class: "button blue-bg" %>
+                        <% end %>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+    </div>
 <% end %>
+</div>
