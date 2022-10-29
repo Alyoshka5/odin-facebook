@@ -10,7 +10,7 @@ class PostsController < ApplicationController
         @post = current_user.posts.build(post_params())
 
         if @post.save
-            redirect_to root_path
+            redirect_back(fallback_location: root_path)
         else
             redirect_to root_path, status: :unprocessable_entity
         end

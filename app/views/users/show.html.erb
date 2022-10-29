@@ -1,44 +1,64 @@
-<div>
-    <%= user_profile_image(@user, 120) %>
-    <h2><%= @profile.first_name %> <%= @profile.last_name %></h3>
-    <%= @user.friends.count %> <%= @user.friends.count == 1 ? "friend" : "friends" %><br>
-    <% if @user == current_user %>
-        <%= link_to "Edit profile", edit_profile_path(@profile) %>
+<div class="users-show">
+<div class="left-container">
+    <div class="header-bar">
+        <div class="profile-image"><%= user_profile_image(@user, 160) %></div>
+        <div class="user-info">
+            <h2><%= @profile.first_name %> <%= @profile.last_name %></h2>
+            <p class="friend-count"><%= @user.friends.count %> <%= @user.friends.count == 1 ? "friend" : "friends" %></p>
+            <% if @user == current_user %>
+                <div class="edit-profile-button">
+                    <%= link_to image_tag("edit-icon.png"), edit_profile_path(@profile) %>
+                    <%= link_to "Edit profile", edit_profile_path(@profile), class: "text-link" %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+
+    <% if @profile.about.length + @profile.hobbies.length + @profile.city.length > 0 %>
+        <div class="intro">
+            <h2>Intro</h2>
+            <% if @profile.about.length > 0 %>
+                <div>
+                    <h4>About me</h4>
+                    <p><%= @profile.about %></p>
+                </div>
+            <% end %>
+            <% if @profile.hobbies.length > 0 %>
+                <div>
+                    <h4>Hobbies</h4>
+                    <p><%= @profile.hobbies %></p>
+                </div>
+            <% end %>
+            <% if @profile.city.length > 0 %>
+                <div>
+                    <h4>Current city</h4>
+                    <p><%= @profile.city %></p>
+                </div>
+            <% end %>
+        </div>
     <% end %>
 </div>
-
-<br><br>
-
-<div>
-    <h3>Intro</h4>
-    <div>
-        <% if @profile.about.length + @profile.hobbies.length + @profile.city.length == 0 %>
-            <p>Nothing to see here</p>
-        <% end %>
-    </div>
-    <div>
-        <% if @profile.about.length > 0 %>
-            <h4>About me</h4>
-            <%= @profile.about %>
-        <% end %>
-    </div>
-    <div>
-        <% if @profile.hobbies.length > 0 %>
-            <h4>Hobbies</h4>
-            <%= @profile.hobbies %>
-        <% end %>
-    </div>
-    <div>
-        <% if @profile.city.length > 0 %>
-            <h4>Current city</h4>
-            <%= @profile.city %>
+    
+<div class="right-container">
+    <% if @profile.user == current_user %>
+        <div class="post-form">
+            <h2>Create post</h2>
+            <hr>
+            <div class="user-info">
+                <%= link_to user_profile_image(current_user), user_path(current_user) %>
+                <%= link_to current_user.first_name+" "+current_user.last_name, user_path(current_user), class: "user-name" %>
+            </div>
+            <%= form_with model: @post do |form| %>
+                <%= form.text_area :content, placeholder: "What's on your mind, #{current_user.first_name}?", class: "post-input" %><br>
+                <%= form.submit "Post", class: "post-button" %>
+            <% end %>
+        </div>
+    <% end %>
+    
+    <div class="posts">
+        <% @posts.each do |post| %>
+            <%= render "posts/post", post: post %>
         <% end %>
     </div>
 </div>
-
-<div>
-    <h3>Posts</h4>
-    <% @posts.each do |post| %>
-        <%= render "posts/post", post: post %>
-    <% end %>
 </div>

@@ -9,8 +9,9 @@ class UsersController < ApplicationController
     end
 
     def show
+        @post = Post.new
         @user = User.find(params[:id])
-        @posts = @user.posts
+        @posts = @user.posts.order(created_at: :desc).limit(50)
         @profile = @user.profile
     end
 end
