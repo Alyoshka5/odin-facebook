@@ -1,44 +1,46 @@
-<%= user_profile_image(current_user, 80) %>
+<div class="profiles-edit">
+<div class="content-container">
+<div class="header-container">
+    <div class="profile-image"><%= user_profile_image(current_user, 80) %></div>
+    <h1>Edit Profile</h1>
+</div>
 
-<%= form_for @profile do |form|%>
+<%= form_for @profile do |form| %>
+    <div class="name">
+        <div class="first-name">
+            <%= form.text_field :first_name, placeholder: "First name" %>
+        </div>
 
-    <div>
-        <%= form.label :profile_image %><br />
-        <%= form.file_field :profile_image, accept: "image/*" %>
+        <div class="last-name">
+            <%= form.text_field :last_name, placeholder: "Last name" %>
+        </div>
     </div>
 
-    <div>
-        <%= form.label :first_name %><br />
-        <%= form.text_field :first_name %>
+    <div class="email">
+        <%= form.email_field :email, placeholder: "Email" %>
     </div>
 
-    <div>
-        <%= form.label :last_name %><br />
-        <%= form.text_field :last_name %>
+    <div class="about">
+        <%= form.text_area :about, placeholder: "About" %>
     </div>
 
-    <div>
-        <%= form.label :email %><br />
-        <%= form.email_field :email %>
+    <div class="hobbies">
+        <%= form.text_area :hobbies, placeholder: "Hobbies" %>
     </div>
 
-    <div>
-        <%= form.label :about, "About me" %><br />
-        <%= form.text_area :about %>
-    </div>
-
-    <div>
-        <%= form.label :hobbies %><br />
-        <%= form.text_area :hobbies %>
-    </div>
-
-    <div>
-        <%= form.label :city, "Current city" %><br />
+    <div class="city">
         <%= form.text_field :city, placeholder: "Current city you live in" %>
     </div>
 
-    <div>
-        <%= form.submit "Save" %>
-        <%= link_to "Cancel", current_user %>
+    <div class="profile-image-container">
+        <%= form.label :profile_image %>
+        <%= form.file_field :profile_image, accept: "image/*" %>
+    </div>
+
+    <div class="buttons">
+        <%= link_to "Cancel", current_user, class: "cancel-button" %>
+        <%= form.submit "Save", class: "save-button" %>
     </div>
 <% end %>
+</div>
+</div>
